@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewData["Title"] = "Slider";
+}
+
+
+<link rel="stylesheet" href="~/css/Slider.css" asp-append-version="true" />
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner slider-control">
+        <div class="carousel-item active c1">
+            <img src="https://i0.wp.com/anitrendz.net/news/wp-content/uploads/2022/03/AOTxANIPLUS-main-banner-landscape.jpg">
+            <div class="carousel-caption d-md-block text-white slidetext">
+                <h5>Movie name 1</h5>
+                <p>some movie description and other</p>
+            </div>
+        </div>
+        <div class="carousel-item c1">
+            <img src="https://images8.alphacoders.com/133/1335152.jpg">
+            <div class="carousel-caption d-md-block text-white slidetext">
+                <h5>Movie name 2</h5>
+                <p>Another movie description and also other</p>
+            </div>
+        </div>
+        <div class="carousel-item c1">
+            <img src="https://www.bhmpics.com/downloads/batman-wallpaper-for-ipad-/43.the-batman-2021-artwork-b8.jpg">
+            <div class="carousel-caption d-md-block text-white slidetext">
+                <h5>.Movie anem 3</h5>
+                <p>And Another one</p>
+            </div>
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon rl-control" aria-hidden="true"></span>
+        <span class="sr-only"></span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon rl-control" aria-hidden="true"></span>
+        <span class="sr-only"></span>
+    </a>
+</div>

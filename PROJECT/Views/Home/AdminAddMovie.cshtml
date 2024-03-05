@@ -1,0 +1,50 @@
+﻿@model MCardModel
+@{
+    ViewData["Title"] = "AdminAddMovie";
+}
+
+<h1>AdminAddMovie</h1>
+
+<div class="container">
+    <div class="Form">
+        <form asp-controller="Home" asp-action="Create" method="post">
+            <div class="form-group">
+                <label asp-for="Name">Enter Movie Name :  </label>
+                <input asp-for="Name" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ImgSrc">Enter Image Url : </label>
+                <input asp-for="ImgSrc" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateOfRelease">Enter Release Date : </label>
+                <input asp-for="DateOfRelease" class="form-control" />
+            </div>            
+            <div class="form-group">
+                <label asp-for="Rating">Enter Rating : </label>
+                <input asp-for="Rating" class="form-control" />
+            </div>           
+            <div class="form-group">
+                <label asp-for="VideoLink">Enter Video Url : </label>
+                <input asp-for="VideoLink" class="form-control" />
+            </div>            
+            <div class="form-group">
+                <label asp-for="Desc">Enter Image Url : </label>
+                <input asp-for="Desc" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Cast">Enter Cast Names : </label>
+                <input asp-for="Cast" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Director">Enter Director Name : </label>
+                <input asp-for="Director" class="form-control" />
+            </div>
+
+            <br>
+             <div class="form-group">
+                 <button type="submit" class="btn">Submit</button>
+             </div>
+        </form>
+    </div>
+</div>

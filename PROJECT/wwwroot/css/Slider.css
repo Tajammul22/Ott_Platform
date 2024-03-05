@@ -1,0 +1,82 @@
+﻿
+.c1 {
+    color: white;
+}
+
+    .c1 img {
+        vertical-align: middle;
+        height: 500px;
+        width: 100%;
+        object-fit: cover;
+        filter: brightness(0.8);
+    }
+
+.slider-control {
+    border-radius: 15px;
+    margin-top: 15px;
+}
+
+.rl-control {
+    padding: 20px;
+    padding-top: 200px;
+    border-radius: 8px;
+}
+
+
+/* Add styling to the carousel caption */
+.carousel-caption {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+@media (max-width:720px) {
+
+    p{
+        padding:0px;
+    }
+
+    .slidetext {
+        margin: 0px;
+    }
+
+    .c1 img {
+        height: 170px;
+    }
+
+    .carousel .carousel-inner .carousel-item .carousel-caption{
+        padding-top : 10px!important;
+        padding-bottom:0px!important;
+    }
+
+    .carousel .carousel-inner .carousel-item .carousel-caption h5 {
+        font-size: 12px;
+    }
+
+    .carousel .carousel-inner .carousel-item .carousel-caption p {
+        font-size: 8px;
+    }
+}
+
+
+
+/*FOR CARD */
+
+.horizontal-card {
+    display: flex;
+    flex-direction: row;
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.card-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust the alpha value for transparency */
+    padding: 15px;
+}

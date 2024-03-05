@@ -1,0 +1,70 @@
+﻿* {
+    font-family: "Ubuntu", sans-serif;
+}
+
+.cards{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content: normal;
+}
+
+.card {
+    margin:10px;
+    width: 150px;
+    height: 210px;
+    text-align: center;
+    justify-content: center;
+    color: white;
+    transition: 0.5s;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+    .card:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+        filter: brightness();
+    }
+
+    .card:hover .content {
+        padding-top: 10px;
+        transition: 1s;
+    }
+
+        .card:hover img {
+            transition: 1s;
+            filter: brightness(0.5);
+        }
+
+.card .content{
+    padding-top:350px;
+    width:100%;
+    position:absolute;
+    transition:0.5s;
+    text-overflow: ellipsis;
+}
+
+.card .content h2{
+    font-size:20px;
+}
+
+.card .content p{
+    font-size:15px;
+}
+
+
+
+@media (max-width:720px) {
+    .card {
+        width: 96px;
+        height: 125px;
+    }
+        .card .content {
+            text-overflow: ellipsis;
+            overflow:hidden;
+        }
+    .card .content h2{
+        font-size:12px
+    }
+    .card .content p{
+        font-size:8px
+    }
+}

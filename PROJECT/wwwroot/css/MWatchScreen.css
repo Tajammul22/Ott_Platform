@@ -1,0 +1,136 @@
+﻿.top-span{
+    color:grey;
+    padding:10px;
+    margin:10px;
+}
+
+.vm-container {
+    width: 100%;
+    display: flex;
+    padding: 18px;
+}
+
+.row1 .imgsrc{
+    height:160px;
+}
+
+.vm-container .row1{
+    margin:10px;
+}
+
+.vm-container .row2{
+    margin:10px;
+}
+
+.vm-container .row .Info {
+}
+
+.Responsive_video {
+    width: 100%;
+}
+
+* {
+    font-family: "Ubuntu", sans-serif;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: normal;
+}
+
+.card {
+    margin: 10px;
+    width: 150px;
+    height: 210px;
+    text-align: center;
+    justify-content: center;
+    color: white;
+    transition: 0.5s;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+    .card:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+        filter: brightness();
+    }
+
+        .card:hover .content {
+            padding-top: 10px;
+            transition: 1s;
+        }
+
+        .card:hover img {
+            transition: 1s;
+            filter: brightness(0.5);
+        }
+
+    .card .content {
+        padding-top: 350px;
+        width: 100%;
+        position: absolute;
+        transition: 0.5s;
+        text-overflow: ellipsis;
+    }
+
+        .card .content h2 {
+            font-size: 20px;
+        }
+
+        .card .content p {
+            font-size: 15px;
+        }
+
+
+
+@media (max-width:720px) {
+    .card {
+        width: 96px;
+        height: 125px;
+    }
+
+        .card .content {
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+
+            .card .content h2 {
+                font-size: 12px
+            }
+
+            .card .content p {
+                font-size: 8px
+            }
+
+    .vm-container{
+        padding:5px;
+    }
+
+    .row1 .imgsrc {
+          height : 130px; 
+    }
+
+    .vm-container .row2 h3{
+        letter-spacing:2px;
+        font-size:20px;
+        margin-bottom:0px;
+    }
+
+    .vm-container .row2 .Info p b{
+        font-size:11px;
+    }
+
+    .vm-container .row2 .Info p{
+        font-size: 10px;
+        margin-bottom:5px;
+    }
+
+    .context b{
+        font-size:11px;
+    }
+
+    .context p{
+        font-size: 10px;
+    }
+}

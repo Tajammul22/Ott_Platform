@@ -1,0 +1,60 @@
+﻿@model List<MCardModel>
+@{
+    ViewData["Title"] = "Cards";
+}
+<link rel="stylesheet" href="css/cards.css" asp-append-version="true" /> 
+<h1>Movies :</h1>
+<br>
+<link rel="stylesheet" herf=" asp-append-version="true" />
+<div class="cards" id="cards">
+
+
+    @if (Model != null)
+    {
+        @foreach (var i in Model)
+        {
+            <a asp-area="" asp-controller="Home" asp-action="WatchMovie"  asp-route-id="@i.Id">
+                <div class="card" id="card">
+                    <img src="@i.ImgSrc" />
+                    <div class="content">
+                        <h2>@i.Name</h2>
+                        <p>@i.DateOfRelease</p>
+                    </div>
+                </div>
+            </a>
+        }
+    }
+    else
+    {
+        Console.WriteLine("!! Model == Null !!");
+    }
+</div>
+
+
+
+
+@* <a asp-area="" asp-controller="Home" asp-action="WatchMovie"
+   asp-route-videoLink=""
+   asp-route-movieName="Jujutsu Kaisen"
+   asp-route-movieContext="nothing"
+   asp-route-director="Sunghoo Park"
+   asp-route-cast="yuta, rika, Gojo"
+   asp-route-dateOfRelease="24 December 2021">
+    <div class="card" id="card">
+        <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQdodPgSefqjeMjBSwRQGknu5qd2vjIYIovPUePaCplC_Vlxk07" />
+        <div class="content">
+            <h2>Jujutsu Kaisen</h2>
+            <p>24 December 2021</p>
+        </div>
+    </div>
+</a> *@
+
+@* <a asp-area="" asp-controller="Home" asp-action="WatchMovie" asp-route-selectedMovie="">
+    <div class="card" id="card">
+        <img src="https://sportshub.cbsistatic.com/i/2023/05/21/6feb1e78-1082-4b63-a4f4-f9fd6b917b5a/demon-slayer.jpg?auto=webp&width=849&height=1200&crop=0.708:1,smart" />
+        <div class="content">
+            <h2>Demon Slayer</h2>
+            <p> 9 April 2023 </p>
+        </div>
+    </div>
+</a> *@
