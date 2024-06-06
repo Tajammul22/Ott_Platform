@@ -1,0 +1,186 @@
+﻿* {
+    font-family: "Ubuntu", sans-serif;
+}
+
+.greet {
+    width:100%;   
+    display:flex;
+    justify-content:center;
+}
+
+    .greet h5 {
+        font-size: 15px;
+        background: red;
+        padding: 15px;
+        margin: 10px;
+        border-radius: 2px;
+        margin-bottom: auto;
+        width: 75%;
+        text-align: center;
+        align-content: center;
+    }
+
+
+.card-container{
+    padding-left:8%;
+    padding-right:8%;
+}
+
+.card-btn {
+    padding: 10px 25px 10px 25px;
+    background: red;
+    width: 180px;
+    text-align: center;
+    margin-left: 15px;
+    border: 1px solid black;
+    transition: 0.2s;
+    color:white;
+}
+
+.card-btn:hover {
+    transition: 0.2s;
+    color: white;
+    background: transparent;
+    border: 1px solid red
+}
+
+.cards{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content: normal;
+}
+
+.card {
+    margin:10px;
+    width: 150px;
+    height: 210px;
+    text-align: center;
+    justify-content: center;
+    border:1px solid black;
+    color: white;
+    transition: 0.2s;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+    .card:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+        filter: brightness();
+        border: 1px solid #fe000a;
+    }
+
+    .card:hover .content {
+        padding-top: 10px;
+        transition: 0.5s;
+    }
+
+        .card:hover img {
+            transition: 0.5s;
+            filter: brightness(0.3);
+        }
+
+.card .content{
+    padding-top:350px;
+    width:100%;
+    position:absolute;
+    transition:0.5s;
+    text-overflow: ellipsis;
+}
+
+.card .content h2{
+    font-size:20px;
+}
+
+.card .content p{
+    font-size:15px;
+}
+
+
+.headofContainer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color:white;
+}
+    .headofContainer .controls {
+        display: flex;
+    }
+
+    .headofContainer .controls input {
+        background: transparent;
+        padding: 8px 10px;
+        color:white;
+        border: 1px solid white;
+    }
+
+    .headofContainer .controls .genres {
+        background-color: #0f0f0f;
+        color:white;
+        padding: 8px 10px;
+        border: 1px solid white; 
+    }
+
+    .headofContainer .controls .s-btn {
+        text-decoration: none;
+        padding: 10px 0px 10px 0px;
+        background: red;
+        width: 60px;
+        text-align: center;
+        border: 1px solid black;
+        transition: 0.2s;
+        color: white;
+        margin-right:12px;
+    }
+
+    .headofContainer .controls .s-btn:hover {
+        transition: 0.2s;
+        color: white;
+        background: transparent;
+        border: 1px solid red
+    }
+
+
+
+@media (max-width:720px) {
+    
+    .card-container{
+        padding:0;
+    }
+    
+    .cards{
+        justify-content:center;
+    }
+
+    .card {
+        width: 96px;
+        height: 135px;
+    }
+        .card .content {
+            text-overflow: ellipsis;
+            overflow:hidden;
+        }
+    
+    .card .content h2{
+        font-size:12px
+    }
+    .card .content p{
+        font-size:8px
+    }
+    .card-btn {
+        padding: 5px 10px 5px 10px;
+        font-size: 10px;
+    }
+    .greet h5{
+        width:85%;
+        font-size:12px;
+    }
+    .headofContainer{
+        display:grid;
+        font-size:12px;
+    }
+    .headofContainer .controls{
+        display:grid;
+    }
+    .s-btn{
+        margin-right:0;
+    }
+}

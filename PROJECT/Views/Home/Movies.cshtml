@@ -1,0 +1,61 @@
+﻿@model List<MCardModel>
+@{
+    ViewData["Title"] = "Movies";
+}
+<br>
+<br>
+<br>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="~/css/cards - Copy (2).css" asp-append-version="true" />
+<div class="headofContainer">
+    <h1>Movies</h1>
+    <h3></h3>
+    <div class="controls">
+        <form asp-area="" asp-controller="Home" asp-action="MSort">
+            <select name="genre" class="genres">
+                <option value="Action">Action</option>
+                <option value="Advanture">Advanture</option>
+                <option value="Comady">Comady</option>
+            </select>
+            <button class="s-btn" type="submit"><i class="fa fa-sort-amount-desc" aria-hidden="true"></i></button>
+        </form>
+        <form asp-area="" asp-controller="Home" asp-action="MSearch">
+            <input type="text" name="query" placeholder="Search Movie" required/>
+            <button class="s-btn" type="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+</div>
+<br>
+<br>
+<div class="card-container">
+    <br>
+    <div class="cards" id="cards">
+        @if (Model != null)
+        {   int IsEmpty = 0;
+            @foreach (var i in Model)
+            {
+                IsEmpty = 1;
+                <a asp-area="" asp-controller="Home" asp-action="WatchMovie" asp-route-id="@i.Id" class="card-a">
+                    <div class="card" id="card">
+                        <img src="@i.ImgSrc" />
+                        <div class="content">
+                            <h2>@i.Name</h2>
+                            <p>@i.DateOfRelease</p>
+                        </div>
+                    </div>
+                </a>
+            }
+            if(IsEmpty == 0)
+            {
+                <h3 style="padding: 5%;margin: 8%;">
+                    No Match Found!
+                </h3>
+            }
+        }
+        else
+        {
+            Console.WriteLine("!! Model == Null !!");
+        }
+    </div>
+</div>
+

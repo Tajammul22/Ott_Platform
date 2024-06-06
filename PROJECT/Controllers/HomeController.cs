@@ -1,6 +1,20 @@
+using FireSharp.Config;
+using FireSharp.Interfaces;
+using FireSharp.Response;
+using Humanizer.Localisation;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using PROJECT.Models;
 using System.Diagnostics;
+using System.Net.Mail;
+using System.Net;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using Firebase.Storage;
+using System.Xml.Linq;
+using Firebase.Auth;
+using NuGet.Common;
 
 namespace PROJECT.Controllers
 {
@@ -9,54 +23,176 @@ namespace PROJECT.Controllers
         List<MCardModel> Movies = new List<MCardModel> {
                 new MCardModel
                 {
-                    Id = "1",
-                    ImgSrc = "https://sportshub.cbsistatic.com/i/2023/05/21/6feb1e78-1082-4b63-a4f4-f9fd6b917b5a/demon-slayer.jpg?auto=webp&width=849&height=1200&crop=0.708:1,smart",
-                    Name = "Demon Slayer",
-                    DateOfRelease = "18 August 2023",
-                    Rating = "5.0",
-                    VideoLink = "https://firebasestorage.googleapis.com/v0/b/fir-362d4.appspot.com/o/Hinokami%20Kagura%20Total%20Concentration%20Dancing%20Flash!%204K%2060FPS%20Demon%20Slayer%20Kimetsu%20no%20Yaiba%20%5BTubeRipper.com%5D.mp4?alt=media&token=7870e3f3-d134-4995-9a80-6b2399d21cbf",
-                    Desc = "Ever since the death of his father, the burden of supporting the family has fallen upon Tanjirou Kamado's shoulders. Though living impoverished on a remote mountain, the Kamado family are able to enjoy a relatively peaceful and happy life. One day, Tanjirou decides to go down to the local village to make a little money selling charcoal. On his way back, night falls, forcing Tanjirou to take shelter in the house of a strange man, who warns him of the existence of flesh-eating demons that lurk in the woods at night. When he finally arrives back home the next day, he is met with a horrifying sight—his whole family has been slaughtered. Worse still, the sole survivor is his sister Nezuko, who has been turned into a bloodthirsty demon. Consumed by rage and hatred, Tanjirou swears to avenge his family and stay by his only remaining sibling. Alongside the mysterious group calling themselves the Demon Slayer Corps, Tanjirou will do whatever it takes to slay the demons and protect the remnants of his beloved sister's humanity.",
-                    Cast = "Tanjiro, Rangoku, Nezuko, Zenitsu",
-                    Director = "Muzan"
-                },
-                new MCardModel
-                {
-                    Id = "2",
-                    ImgSrc = "https://m.media-amazon.com/images/M/MV5BODM0NmVjMzUtOTJhNi00N2ZhLWFkYmMtYmZmNjRiY2M1YWY4XkEyXkFqcGdeQXVyOTgxOTA5MDg@._V1_.jpg",
-                    Name = "Jujutsu Kaisen 0",
-                    DateOfRelease = "12 Feb 2024",
-                    Rating = "4.0",
-                    VideoLink = "https://firebasestorage.googleapis.com/v0/b/fir-362d4.appspot.com/o/Yuta%20vs%20Geto%204K%E2%A7%B88K%20-%20Jujutsu%20Kaisen%200%20Movie%20Bluray%20Release.webm?alt=media&token=f7eb3ae5-d664-4058-9a1a-ca54195370bd",
-                    Desc = "The year is 2006, and the halls of Tokyo Prefectural Jujutsu High School echo with the endless bickering and intense debate between two inseparable best friends. Exuding unshakeable confidence, Satoru Gojou and Suguru Getou believe there is no challenge too great for young and powerful Special Grade sorcerers such as themselves. They are tasked with safely delivering a sensible girl named Riko Amanai to the entity whose existence is the very essence of the jujutsu world. However, the mission plunges them into an exhausting swirl of moral conflict that threatens to destroy the already feeble amity between sorcerers and ordinary humans. Twelve years later, students and sorcerers are the frontline defense against the rising number of high-level curses born from humans' negative emotions. As the entities grow in power, their self-awareness and ambition increase too. The curses unite for the common goal of eradicating humans and creating a world of only cursed energy users, led by a dangerous, ancient cursed spirit. To dispose of their greatest obstacle—the strongest sorcerer, Gojou—they orchestrate an attack at Shibuya Station on Halloween. Dividing into teams, the sorcerers enter the fight prepared to risk everything to protect the innocent and their own kind.",
-                    Director = "",
-                    Cast = "Yuta , Rika, Gojo Satoru"
-                },
-                new MCardModel
-                {
                     Id = "3",
                     ImgSrc = "https://images-cdn.ubuy.co.in/64020c032b88b367ca7410e3-anime-one-piece-poster-the-straw-hat.jpg",
                     Name = "One Piece",
                     DateOfRelease = "21 May 2023",
-                    Rating = "5.0",
+                    Rating = "5.0", 
                     VideoLink = "https://firebasestorage.googleapis.com/v0/b/fir-362d4.appspot.com/o/Zoro%20vs%20King%20%5B4K%E2%A7%B850fps%5D%20The%20King%20of%20Hell%20%EF%BD%9C%20One%20Piece%20Episode%201062.webm?alt=media&token=85168f71-c87a-4730-9b49-15e04090b1f5",
                     Desc = "Gold Roger was known as the Pirate King, the strongest and most infamous being to have sailed the Grand Line. The capture and execution of Roger by the World Government brought a change throughout the world. His last words before his death revealed the existence of the greatest treasure in the world, One Piece. It was this revelation that brought about the Grand Age of Pirates, men who dreamed of finding One Piece—which promises an unlimited amount of riches and fame—and quite possibly the pinnacle of glory and the title of the Pirate King. Enter Monkey Luffy, a 17-year-old boy who defies your standard definition of a pirate. Rather than the popular persona of a wicked, hardened, toothless pirate ransacking villages for fun, Luffy's reason for being a pirate is one of pure wonder: the thought of an exciting adventure that leads him to intriguing people and ultimately, the promised treasure. Following in the footsteps of his childhood hero, Luffy and his crew travel across the Grand Line, experiencing crazy adventures, unveiling dark mysteries and battling strong enemies, all in order to reach the most coveted of all fortunes—One Piece.",
                     Director = "Oda",
-                    Cast = "Mayumi Tanaka, Kazuya Nakai,Akemi Okamura"
+                    Cast = "Mayumi Tanaka, Kazuya Nakai,Akemi Okamura",
+                    Genre = "Action"
                 }
             };
 
+        List<SCardModel> Series = new List<SCardModel> {
+                 new SCardModel{
+                    Id = 2,
+                    Name = "The Family Man",
+                    ImgSrc  = "https://firebasestorage.googleapis.com/v0/b/storage1-452d7.appspot.com/o/familyman.jpg?alt=media&token=a75b041f-dbdd-4c9c-baf8-b2e522a4ae77",
+                    Director = "me again",
+                    Genre =     "Advanture,Comady",
+                    Cast = "sanji",
+                    Desc = "Shanks Is Good Or Bad",
+                    Episodes = new List<Episode>
+                            {
+                                new Episode { Id = 1, EpisodeName = "Episode 1", VideoSource = "https://firebasestorage.googleapis.com/v0/b/fir-362d4.appspot.com/o/ep1.mp4?alt=media&token=b7fc508a-4691-4fa4-b164-ad0139f95dde" },
+                                new Episode { Id = 2, EpisodeName = "Episode 2", VideoSource = "https://firebasestorage.googleapis.com/v0/b/fir-362d4.appspot.com/o/ep2.mp4?alt=media&token=a92ef8f2-8bd6-4b3d-a77f-5cd829276869" }
+                            }
+                    },
+                 new SCardModel{
+                    Id = 3,
+                    Name = "Richer",
+                    ImgSrc  = "https://firebasestorage.googleapis.com/v0/b/storage1-452d7.appspot.com/o/richer.jpg?alt=media&token=0c4065a2-074d-4d0d-a63e-00f2912aaae2",
+                    Director = "me again for third Time",
+                    Genre = "Action,Drama",
+                    Cast = "Robin",
+                    Desc = "Shanks Is Good Or Bad",
+                    Episodes = new List<Episode>
+                            {
+                                new Episode { Id = 1, EpisodeName = "Episode 1", VideoSource = "" },
+                                new Episode { Id = 2, EpisodeName = "Episode 2", VideoSource = "" }
+                            }
+                    }
+         };
+        List<Models.Query> Querys = new List<Models.Query>();
         private readonly ILogger<HomeController> _logger;
-        public HomeController(ILogger<HomeController> logger)
+        FirebaseAuthProvider auth;
+        public HomeController(ILogger<HomeController> logger, IWebHostEnvironment env)
         {
-            _logger = logger;
-            
-        }
+                _env = env;
+                string authSecret = "AIzaSyCDmMGUWzT-thkcfxevhQk4tnpJinvoeh4";
+                string basePath = "https://fir-362d4-default-rtdb.firebaseio.com";
+                auth = new FirebaseAuthProvider(new Firebase.Auth.FirebaseConfig("AIzaSyCDmMGUWzT-thkcfxevhQk4tnpJinvoeh4"));
+                IFirebaseClient client;
+                IFirebaseConfig config = new FireSharp.Config.FirebaseConfig
+                {
+                    AuthSecret = authSecret,
+                    BasePath = basePath,
+                };
 
+                client = new FireSharp.FirebaseClient(config);
+
+                if (client != null && !string.IsNullOrEmpty(basePath) && !string.IsNullOrEmpty(authSecret))
+                {
+                    FirebaseResponse response = client.Get("Movies/");
+                    if (response != null && response.Body != "null")
+                    {
+                    Dictionary<string, MCardModel> Movie = response.ResultAs<Dictionary<string, MCardModel>>();
+
+                        // Iterate through the dictionary and add users to the list
+                        foreach (var i in Movie)
+                        {
+                            Movies.Add(i.Value);
+                        }
+                    }
+                }
+
+                if (client != null && !string.IsNullOrEmpty(basePath) && !string.IsNullOrEmpty(authSecret))
+                {
+                    FirebaseResponse response = client.Get("Series/");
+                    if (response != null && response.Body != "null")
+                    {
+                        Dictionary<string, SCardModel> series = response.ResultAs<Dictionary<string, SCardModel>>();
+                        foreach (var i in series){
+                            List<Episode> newepList = new List<Episode>();
+                            List<Episode> epList = i.Value.Episodes;
+                            foreach(Episode ep in epList){
+                                if(ep != null){
+                                    newepList.Add(ep);
+                                }
+                            }
+                            i.Value.Episodes = newepList;
+                            Series.Add(i.Value);
+                        }
+                    }
+
+                }
+
+                if (client != null && !string.IsNullOrEmpty(basePath) && !string.IsNullOrEmpty(authSecret))
+                {
+                    FirebaseResponse response = client.Get("Querys/");
+                    if (response != null && response.Body != "null")
+                    {
+                        Dictionary<string, Models.Query> querys = response.ResultAs<Dictionary<string, Models.Query>>();
+                        foreach (var i in querys)
+                        {
+                            Querys.Add(i.Value);
+                        }
+                    }
+                }
+                _logger = logger;
+
+        }     
+        IFirebaseConfig config = new FireSharp.Config.FirebaseConfig
+        {
+            AuthSecret = "Uc3ZsYldvZy4c2cE7vr371TYGHbzAtLBSQj7FFD1",
+            BasePath = "https://fir-362d4-default-rtdb.firebaseio.com/"
+        };
+        IFirebaseClient client;
         public IActionResult Index()
         {
-
-            return View(Movies);
+            CombinedViewModel combinedViewModel = new CombinedViewModel();
+            combinedViewModel.MCardModels = Movies;
+            combinedViewModel.SCardModels = Series;
+            return View(combinedViewModel);
         }
+
+        //series operation
+        public Episode GetEpisode(SCardModel obj,int id)
+        {
+            try
+            {
+                foreach (Episode i in obj.Episodes)
+                {
+                    if (i.Id == id && i !=null)
+                    {
+                        return i;
+                    }
+                }
+            } catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            return obj.Episodes[0];
+        }
+        public IActionResult WatchSeries(int id = 1)
+        {
+            var token = HttpContext.Session.GetString("_UserToken");
+            if (token != null)
+            {
+                SCardModel Ser = Series.FirstOrDefault(m => m.Id == id);
+                MyViewModel model = new MyViewModel();
+                model.Series = Ser;
+
+                model.Episode = GetEpisode(Ser, id);
+                return View("SWatchScreen", model);
+            }
+            else
+            {
+                return RedirectToAction("SignIn");
+            }
+        }
+        public IActionResult ChangeEpisode(int seriesId, int episodeId)
+        {
+            SCardModel Ser = Series.FirstOrDefault(m => m.Id == seriesId);
+            MyViewModel model = new MyViewModel();
+            model.Series = Ser;
+            model.Episode = GetEpisode(Ser, episodeId);
+            return View("SWatchScreen", model);
+        }
+        //end of series operation
 
         public IActionResult Privacy()
         {
@@ -69,12 +205,6 @@ namespace PROJECT.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-
-        public IActionResult Login()
-        {
-            return View();
-        }
-
         public IActionResult Help()
         {
             return View();
@@ -85,32 +215,603 @@ namespace PROJECT.Controllers
             return View();
         }
 
+        public IActionResult WatchMovie(string id = "1")
+        {
+            var token = HttpContext.Session.GetString("_UserToken");
+            if (token != null)
+            {
+                MCardModel Movie = Movies.FirstOrDefault(m => m.Id == id);
+                return View("MWatchScreen", Movie);
+            }
+            else
+            {
+                return RedirectToAction("SignIn");
+            }
+           
+        }
 
+        ////New Movie Add to Cloud 
         //Take movie info and create card 
         //taking input from admin
+
+        //admin section
+        public IActionResult Admin()
+        {
+            if(HttpContext.Session.GetString("Admin")!= null)
+            {
+                return View("Admin");
+            }
+            return View("Index");
+        }
         public IActionResult AdminAddMovie()
         {
             return View();
         }
-        //creating model of that info
-        [HttpGet]
-        public IActionResult Create()
+        [HttpPost]
+        public async Task<IActionResult> Create(MCardModel obj,IFormFile myImg,IFormFile myVideo)
+        {
+            try
+            {
+                client = new FireSharp.FirebaseClient(config);
+                obj.ImgSrc = await UploadImage(myImg, 0);
+                obj.VideoLink = await UploadImage(myVideo, 1);
+                var data = obj;
+                PushResponse response = client.Push("Movies/", data);
+            }
+            catch (NullReferenceException ex)
+            {
+
+                ModelState.AddModelError(string.Empty, ex.Message);
+            }
+
+            return View("Admin");
+        }
+
+        //Upload file to Firebase Storage // Very IMP
+        private readonly IWebHostEnvironment _env;
+        //firebase storage
+        [HttpPost]
+        public async Task<string> UploadImage(IFormFile imageFile, int no)
+        {
+            string url = "--none--";
+            if (imageFile != null && imageFile.Length > 0)
+            {
+                Debug.WriteLine("working--------------------->");
+                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(imageFile.FileName);
+                var filePath = Path.Combine(_env.WebRootPath, "uploads", fileName);
+
+                try
+                {
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await imageFile.CopyToAsync(stream);
+                    }
+
+                    // Upload the image to Firebase Storage
+                    var imageUrl = await UploadImageToFirebase(fileName, filePath,no);
+                    url = Convert.ToString(imageUrl);
+                    ViewBag.ImageUrl = imageUrl;
+
+                    // Delayed clean up: delete the local file after a short delay
+                    Task.Delay(1000).ContinueWith(t =>
+                    {
+                        if (System.IO.File.Exists(filePath))
+                        {
+                            System.IO.File.Delete(filePath);
+                        }
+                    });
+                    return Convert.ToString(imageUrl);
+                }
+                catch (Exception ex)
+                {
+                    // Handle exceptions appropriately
+                    // For demonstration purposes, printing the exception message
+                    Console.WriteLine($"An error occurred: {ex.Message}");
+                }
+
+                return url;
+            }
+            else
+            {
+                Debug.Write(url);
+                Debug.WriteLine("Not Working ======================>");
+            }
+
+            ViewBag.ImageUrl = null;
+            return url;
+        }
+
+
+        private async Task<string> UploadImageToFirebase(string fileName, string filePath,int no)
+        {
+            var stream = new FileStream(filePath, FileMode.Open);
+
+            var auth = "Uc3ZsYldvZy4c2cE7vr371TYGHbzAtLBSQj7FFD1";
+            var bucket = "fir-362d4.appspot.com";
+            var storage = new FirebaseStorage(bucket, new FirebaseStorageOptions
+            {
+                AuthTokenAsyncFactory = () => Task.FromResult(auth)
+            });
+            if(no == 0)
+            {
+                var imageUrl = await storage.Child("Movies").Child(fileName).PutAsync(stream);
+                return imageUrl;
+            } else
+            {
+                var imageUrl = await storage.Child("Series").Child(fileName).PutAsync(stream);
+                return imageUrl;
+            }
+
+           
+        }
+
+        //end of admin section
+        public SCardModel GetSeriesById(int id)
+        {
+            // Assuming you have a data context or repository to interact with the database
+            // This is just a placeholder implementation, replace it with your actual data access logic
+            var series = Series.FirstOrDefault(s => s.Id == id);
+            return series;
+        }
+
+        public IActionResult Advance()
         {
             return View();
         }
 
-        //adding that model to the Movie List
-        [HttpPost]
-        public IActionResult Create(MCardModel movie)
+        public IActionResult AllMovies()
         {
-            Movies.Add(movie);
-            return View("Index");
+            return View("Movies",Movies);
+        }
+
+        public IActionResult AllSeries()
+        {
+            return View("Series",Series);
+        }
+
+        public ActionResult MSort(string genre)
+        {
+            ViewBag.Query = genre;
+            List<MCardModel> temp = Movies.Where(movie => movie.Genre.Contains(genre)).ToList();
+
+            return View("Movies", temp);
+        }
+
+        public ActionResult MSearch(string query)
+        {
+            ViewBag.Query = query;
+            try
+            {
+                List<MCardModel> temp = Movies.Where(movie => movie.Name.ToLower().Contains(query.ToLower())).ToList();
+                return View("Movies", temp);
+            } catch (Exception ex){
+                Console.Write(ex.ToString());
+                return View("Movies");
+            }
+            
+        }
+
+        public ActionResult SSort(string genre)
+        {
+            ViewBag.Query = genre;
+            List<SCardModel> temp = Series.Where(series => series.Genre.Contains(genre)).ToList();
+            return View("Series", temp);
+        }
+
+        public ActionResult SSearch(string query)
+        {
+            ViewBag.Query = query;
+            List<SCardModel> temp = Series.Where(series => series.Name.ToLower().Contains(query.ToLower())).ToList();
+            return View("Series", temp);
+        }
+
+        //Prototype Search{
+
+        //public actionresult msearch(string query)
+        //{
+        //    viewbag.query = query;
+        //    list<mcardmodel> temp = new list<mcardmodel>();
+        //    foreach (mcardmodel i in movies)
+        //    {
+        //        if (i.name.tolower().contains(query.tolower()))
+        //        {
+        //            temp.add(i);
+        //        }
+        //    }
+        //    return view("movies", temp);
+        //}
+
+        //}
+
+        //Prototype Sort{
+
+        //public ActionResult MSort(string genre)
+        //{
+        //    ViewBag.Query = genre;
+        //    List<MCardModel> temp = new List<MCardModel>();
+        //    foreach (var i in Movies)
+        //    {
+        //        String[] Genres = i.Genre.Split(',');
+        //        foreach (var g in Genres)
+        //        {
+        //            if (g.ToLower() == genre.ToLower())
+        //            {
+        //                temp.Add(i);
+        //            }
+        //        }
+        //    }
+
+        //    return View("Movies", temp);
+        //}
+
+        //}
+
+        //admin section
+        //Series Upload
+        public IActionResult Add()
+        {
+            return View("Tryle");
+        }
+
+        //still hava error
+        [HttpPost]
+        public async Task<IActionResult> CreateSeries(SCardModel obj,int EpId,string Epname,IFormFile imgsrc,IFormFile vidsrc)
+        {
+            try
+            {
+                client = new FireSharp.FirebaseClient(config);
+                var data = obj;
+                string imglink = await UploadImage(imgsrc,1);
+                string vidlink = await UploadImage(vidsrc, 1);
+                data.Episodes = new List<Episode>()
+                {
+                     new Episode { Id = EpId, EpisodeName = Epname, VideoSource = vidlink }
+                };
+                data.ImgSrc = imglink;
+                PushResponse response = client.Push("Series/", data);
+            } catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+            }
+            return View("Admin");
         } 
 
-        public IActionResult WatchMovie(string id)
+        public async Task<IActionResult> AddEpisodes()
         {
-            MCardModel Movie = Movies.FirstOrDefault(m => m.Id == id);
-            return View("MWatchScreen", Movie);
+            try
+            {
+                client = new FireSharp.FirebaseClient(config);
+                FirebaseResponse response = await client.GetAsync("Series/");
+                var series = response.ResultAs<Dictionary<string, SCardModel>>();
+                return View("AddEpisodes", series);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { Success = false, Message = ex.Message });
+            }
+            return View("AddEpisodes",Series);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> addEp(string seriesId, int EpId, string EpName, IFormFile EpVideo)
+        {
+            client = new FireSharp.FirebaseClient(config);
+            FirebaseResponse response = await client.GetAsync("Series/"+seriesId+"/Episodes");
+            List<Episode> Eplist = response.ResultAs<List<Episode>>();
+            if (EpVideo != null) {
+                client = new FireSharp.FirebaseClient(config);
+                string vidlink = await UploadImage(EpVideo, 1);
+                if (EpVideo == null)
+                {
+                    Debug.Write("File not Found ++++++++++++++++++++++++>");
+                }
+                Debug.WriteLine(seriesId + "=========================>");
+                Episode temp = new Episode()
+                {
+                    Id = EpId,
+                    EpisodeName = EpName,
+                    VideoSource = vidlink,
+                };
+                var data = temp;
+                await client.SetAsync("Series/" + seriesId + "/Episodes/" + Eplist.Count(), data);
+            }
+            return View("Admin");
+        }
+
+        //Movie Delete by Admin
+        public async Task<IActionResult> AdminDelete()
+        {
+            try
+            {
+                client = new FireSharp.FirebaseClient(config);
+                FirebaseResponse response = await client.GetAsync("Movies/");
+                var movies = response.ResultAs<Dictionary<string, MCardModel>>();
+                return View("DeleteMovie", movies);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { Success = false, Message = ex.Message });
+            }
+        }
+        [HttpPost]
+        public async Task<IActionResult> MDelete(string movieId)
+        {
+            try
+            {
+                client = new FireSharp.FirebaseClient(config);
+                FirebaseResponse response = await client.DeleteAsync("Movies/" + movieId);
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)//OK -> notFound (debugging)
+                {
+                    return View("Admin");
+                }
+                else
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError, new { Success = false, Message = "Failed to delete movie" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { Success = false, Message = ex.Message });
+            }
+        }
+
+        public async Task<IActionResult> DeleteEpisodes()
+        {
+            try
+            {
+                client = new FireSharp.FirebaseClient(config);
+                FirebaseResponse response = await client.GetAsync("Series/");
+                var series = response.ResultAs<Dictionary<string, SCardModel>>();
+                return View("DeleteEp", series);
+            } catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { Success = false, Message = ex.Message });
+            }
+        }
+        public async Task<IActionResult> DeleteEpisode(string seriesId)
+        {
+            try
+            {
+                client = new FireSharp.FirebaseClient(config);
+                FirebaseResponse response = await client.GetAsync("Series/"+seriesId+"/Episodes");
+                Debug.WriteLine("Series/" + seriesId + "/Episodes============?");
+                var Episodes = response.ResultAs<List<Episode>>();
+                ViewBag.SeriesId = seriesId;
+                return View("DelEp", Episodes);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { Success = false, Message = ex.Message });
+            }
+        }
+
+        public async Task<IActionResult> DelEpi(string SerId,int EpId)
+        {
+            try
+            {
+                Debug.WriteLine("Series/" + SerId + "/Episodes/" + EpId + "...............................>");
+               if(EpId != 0)
+                {
+                    client = new FireSharp.FirebaseClient(config);
+                    FirebaseResponse response = await client.DeleteAsync("Series/" + SerId + "/Episodes/" + EpId);
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        return View("Admin");
+                    }
+                    else
+                    {
+                        return StatusCode(StatusCodes.Status500InternalServerError, new { Success = false, Message = "Failed to delete movie" });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { Success = false, Message = ex.Message });
+            }
+            Debug.WriteLine("Series/" + SerId + "/Episodes/" + EpId + "...............................>");
+            return View("Admin");
+        }
+        public async Task<IActionResult> AdminDeleteSeries()
+        {
+            try
+            {
+                client = new FireSharp.FirebaseClient(config);
+                FirebaseResponse response = await client.GetAsync("Series/");
+                var series = response.ResultAs<Dictionary<string, SCardModel>>();
+                return View("DeleteSeries", series);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { Success = false, Message = ex.Message });
+            }
+        }
+        [HttpPost]
+        public async Task<IActionResult> SDelete(string seriesId)
+        {
+            try
+            {
+                client = new FireSharp.FirebaseClient(config);
+                FirebaseResponse response = await client.DeleteAsync("Series/" + seriesId);
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    return View("Admin");
+                }
+                else
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError, new { Success = false, Message = "Failed to delete movie" });
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { Success = false, Message = ex.Message });
+            }
+        }
+        //sending mail
+        [HttpPost]
+		public ActionResult SendEmail(string mail,string message)
+		{
+			try
+			{
+				if (ModelState.IsValid)
+				{
+                    string subject = "Query Registraion";
+                    var senderEmail = new MailAddress("natalijay2515@gmail.com", "JKT Movie Streeming");
+					var receiverEmail = new MailAddress(mail, "Receiver");
+					var password = "yqdglmhlmnqrcghw";
+					var sub = subject;
+					var body = "Your Query has been Submited Successfuly.\nWe will Proceed your Qeury and Answer you Shortly\n\nReview Your Query : \n" + message;
+					var smtp = new SmtpClient
+					{
+						Host = "smtp.gmail.com",
+						Port = 587,
+						EnableSsl = true,
+						DeliveryMethod = SmtpDeliveryMethod.Network,
+						UseDefaultCredentials = false,
+						Credentials = new NetworkCredential(senderEmail.Address, password)
+					};
+					using (var mess = new MailMessage(senderEmail, receiverEmail)
+					{
+						Subject = subject,
+						Body = body
+					})
+					{
+						smtp.Send(mess);
+					}
+                    try
+                    {
+                        //adding query to our realtime database
+                        client = new FireSharp.FirebaseClient(config);
+                        Models.Query data = new Models.Query();
+                        data.email = mail;
+                        data.message = message;
+                        PushResponse response = client.Push("Querys/", data);
+                    }
+                    catch (Exception ex)
+                    {
+
+                        ModelState.AddModelError(string.Empty, ex.Message);
+                    }
+                    ViewBag.EmailSent = true;
+					return View("Help");
+				}
+			}
+			catch (Exception e)
+			{
+				ViewBag.Error = "Some Error";
+                Debug.WriteLine(e.Message + "-----------------<>");
+			}
+			return View("Help");
+		}
+
+        public IActionResult WatchQuery()
+        {
+            return View("Querys",Querys);
+        }
+
+        public IActionResult Tryle(MCardModel obj,IFormFile myImg,IFormFile myVideo)
+        {
+            if(obj != null)
+            {
+                Debug.WriteLine(obj.Name + " Working ===============================================>");
+            } else
+            {
+                Debug.WriteLine("Not Working ==============================>");
+            }
+            if(myImg != null)
+            {
+                Debug.WriteLine("Image Working ===============================================>");
+            }
+            else
+            {
+                Debug.WriteLine("Not Working ==============================>");
+            }
+            if(myVideo != null)
+            {
+                Debug.WriteLine("Video Working ===============================================>");
+            }
+            else
+            {
+                Debug.WriteLine("Video Not Working ==============================>");
+            }
+            Debug.WriteLine(obj + "===============================================>");
+            return View("Admin");
+        }
+
+        //Authentication Start
+        public IActionResult Registration()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Registration(LoginModel loginModel)
+        {
+            try
+            {
+                //create the user
+                await auth.CreateUserWithEmailAndPasswordAsync(loginModel.Email, loginModel.Password);
+                //log in the new user
+                var fbAuthLink = await auth
+                                .SignInWithEmailAndPasswordAsync(loginModel.Email, loginModel.Password);
+                string token = fbAuthLink.FirebaseToken;
+                //saving the token in a session variable
+                if (token != null)
+                {
+                    HttpContext.Session.SetString("_UserToken", token);
+
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (FirebaseAuthException ex)
+            {
+                var firebaseEx = JsonConvert.DeserializeObject<FirebaseError>(ex.ResponseData);
+                ModelState.AddModelError(String.Empty, firebaseEx.error.message);
+                return View(loginModel);
+            }
+
+            return View();
+
+        }
+
+
+        public IActionResult SignIn()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SignIn(LoginModel loginModel)
+        {
+            try
+            {
+                var fbAuthLink = await auth.SignInWithEmailAndPasswordAsync(loginModel.Email, loginModel.Password);
+                string token = fbAuthLink.FirebaseToken;
+                if (token != null)
+                {
+                    HttpContext.Session.SetString("_UserToken", token);
+                    if(loginModel.Email == "admin@gmail.com")
+                    {
+                        HttpContext.Session.SetString("Admin", token);
+                    }
+                    return RedirectToAction("Index");
+                }
+
+            }
+            catch (FirebaseAuthException ex)
+            {
+                var firebaseEx = JsonConvert.DeserializeObject<FirebaseError>(ex.ResponseData);
+                ModelState.AddModelError(String.Empty, firebaseEx.error.message);
+                return View(loginModel);
+            }
+
+            return View();
+        }
+
+        public IActionResult LogOut()
+        {
+            HttpContext.Session.Remove("_UserToken");
+            return RedirectToAction("SignIn");
+        }
+
     }
 }

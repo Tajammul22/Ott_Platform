@@ -1,4 +1,12 @@
-﻿.top-span{
+﻿
+
+
+.f-cards {
+    padding: 10%;
+}
+
+
+.top-span{
     color:grey;
     padding:10px;
     margin:10px;
@@ -133,4 +141,47 @@
     .context p{
         font-size: 10px;
     }
+}
+
+
+/*for serairs*/
+
+.CurrentEpisode {
+    background-color: red;
+    color: white;
+    text-decoration: none;
+    padding: 8px 10px 8px 10px;
+    border: 1px solid red;
+    border-radius: 3px;
+    margin: 3px;
+    transition: 0.2s;
+}
+
+    .CurrentEpisode:hover{
+        color:white;
+    }
+
+    .Episodes-box {
+        padding: 15px;
+        background: black;
+        display: flex;
+        flex-wrap: wrap;
+        border-radius: 3px;
+    }
+
+.Episodes-box .AnotherEpisode{
+
+    text-decoration:none;
+    color:white;
+    padding: 8px 10px 8px 10px;
+    background: transparent;
+    border: 1px solid grey;
+    border-radius: 3px;
+    margin: 3px;
+    transition : 0.2s;
+}
+
+.Episodes-box .AnotherEpisode:hover{
+    transition : 0.2s;
+    border : 1px solid red;
 }

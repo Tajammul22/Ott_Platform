@@ -40,6 +40,11 @@ button.accept-policy[b-n9xu4f3uxq] {
   line-height: inherit;
 }
 
+.container[b-n9xu4f3uxq]{
+    max-width:none;
+    padding:0;
+}
+
 .footer[b-n9xu4f3uxq] {
   background-color:#15151e;
   position: absolute;
@@ -49,6 +54,37 @@ button.accept-policy[b-n9xu4f3uxq] {
   line-height: 60px;
 }
 
+/*custom*/
+.navbar[b-n9xu4f3uxq] {
+    position: fixed;
+    width: 100%;
+    z-index: 20;
+    transition: 0.5s;
+}
+
+.scrolled[b-n9xu4f3uxq] {
+    transition: 0.5s;
+    background-color: black
+}
+
+/*login btn*/
+
+.login-btn[b-n9xu4f3uxq] {
+    padding: 0px 10px 0px 10px;
+    background: red;
+    width: 120px;
+    text-align: center;
+    margin-left: 15px;
+    border: 1px solid transparent;
+    transition: 0.2s;
+}
+
+.login-btn:hover[b-n9xu4f3uxq]{
+    transition : 0.2s;
+    color:white;
+    background:transparent;
+    border : 1px solid red
+}
 
 /*footer*/
 
@@ -64,11 +100,13 @@ footer[b-n9xu4f3uxq]{
 }
 
 .footer[b-n9xu4f3uxq] {
-    background: #15151e;
+    /*background: #141414;*/
+    border-top: 1px solid #80808042;
+    background: black;
     padding: 30px 0px;
     font-family: 'Play', sans-serif;
     text-align: center;
-    position:relative;
+    position: relative;
 }
 
     .footer .row[b-n9xu4f3uxq] {
@@ -134,10 +172,16 @@ footer[b-n9xu4f3uxq]{
 
 
 @media (max-width:720px) {
+    .login-btn[b-n9xu4f3uxq]{
+        margin-left:0px;
+        margin-top:10px;
+    }
     .slidetext[b-n9xu4f3uxq] {
         margin: 50px;
     }
-
+    .navbar[b-n9xu4f3uxq]{
+        position:relative;
+    }
     .c1 img[b-n9xu4f3uxq] {
         height: 170px;
     }

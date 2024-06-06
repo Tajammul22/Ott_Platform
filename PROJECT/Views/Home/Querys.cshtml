@@ -1,0 +1,25 @@
+﻿@model List<Query>
+@{
+    ViewData["Title"] = "Querys";
+}
+
+<style>
+    .container table{
+        width:100%;
+    }
+</style>
+<br>
+<br>
+<div class="QueryDiv" style="padding:8%;">
+    <h1>Querys</h1>
+    <div class="container">
+        <table style="border:2px solid white">
+            <tr><th>From</th><th>Query</th></tr>
+                @foreach(Query i in Model){
+                <tr style="border:1px solid white"><td style="border:1px solid white">@i.email</td>  <td>@i.message</td></tr>
+                }
+        </table>
+    </div>
+</div>
+
+

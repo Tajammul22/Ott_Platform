@@ -1,33 +1,46 @@
-﻿@model List<MCardModel>
+﻿@model CombinedViewModel
 @{
     ViewData["Title"] = "Cards";
 }
-<link rel="stylesheet" href="css/cards.css" asp-append-version="true" /> 
-<h1>Movies :</h1>
-<br>
-<link rel="stylesheet" herf=" asp-append-version="true" />
-<div class="cards" id="cards">
-
-
-    @if (Model != null)
-    {
-        @foreach (var i in Model)
+<link rel="stylesheet" href="css/cards.css" asp-append-version="true" />
+<div class="greet">
+    <h5>Welcome, Sit back, relax, let your journey begin  <i class="fa fa-film" aria-hidden="true"></i> </h5>
+</div>
+<br><br>
+<div class="card-container">
+    <div class="title-btn">
+        <div class="row-btn">
+            <a class="card-btn" asp-area="" asp-controller="Home" asp-action="AllMovies">More Movies</a>
+        </div>
+    </div>
+    <br>
+    <div class="cards" id="cards">
+        @if (Model != null)
         {
-            <a asp-area="" asp-controller="Home" asp-action="WatchMovie"  asp-route-id="@i.Id">
-                <div class="card" id="card">
-                    <img src="@i.ImgSrc" />
-                    <div class="content">
-                        <h2>@i.Name</h2>
-                        <p>@i.DateOfRelease</p>
+            int count = 0;
+            @foreach (var i in Model.MCardModels)
+            {
+                <a asp-area="" asp-controller="Home" asp-action="WatchMovie" asp-route-id="@i.Id" class="card-a">
+                    <div class="card" id="card">
+                        <img src="@i.ImgSrc" />
+                        <div class="content">
+                            <h2>@i.Name</h2>
+                            <p>@i.DateOfRelease</p>
+                        </div>
                     </div>
-                </div>
-            </a>
+                </a>
+                count++;
+                if(count == 7)
+                {
+                    break;
+                }
+            }
         }
-    }
-    else
-    {
-        Console.WriteLine("!! Model == Null !!");
-    }
+        else
+        {
+            Console.WriteLine("!! Model == Null !!");
+        }
+    </div>
 </div>
 
 

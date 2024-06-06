@@ -1,0 +1,80 @@
+﻿@model LoginModel
+<style>
+    .row1 {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        padding: 25px;
+        flex-direction: column;
+        align-items: center;
+        height:500px;
+       /*  background: url("https://firebasestorage.googleapis.com/v0/b/fir-362d4.appspot.com/o/images%2Fpexels-jayson-gomes-1455414-3119160.jpg?alt=media&token=def7d02c-1392-402e-b9a1-9f58d301b309");
+        background-size: cover;
+        background-position-y: -780px; */
+    }
+
+    .btn {
+        text-decoration: none;
+        padding: 10px 25px 10px 25px;
+        background: red;
+        width: 180px;
+        text-align: center;
+        margin-left: 15px;
+        border: 1px solid black;
+        transition: 0.2s;
+        color: white;
+    }
+
+        .btn:hover {
+            transition: 0.2s;
+            color: white;
+            background: transparent;
+            border: 1px solid red;
+        }
+
+    .Reg {
+        text-align: center;
+        width: 300px;
+    }
+
+        .Reg a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .Reg form .form-group input {
+            background: transparent;
+            color: white;
+        }
+</style>
+<br>
+<br>
+<br>
+<br>
+<div class="row1">
+    <h2>Register</h2>
+    <div class="col-md-4 Reg">
+        <form asp-controller="home" asp-action="Registration">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="Email" class="form-control" placeholder="Enter Email"/>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <br>
+            <div class="form-group">
+                <input asp-for="Password" class="form-control" type="password" placeholder="Set Password"/>
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <br />
+                <button class="btn">Register</button>
+        </form>
+        <br>
+        <a asp-action="SignIn">Already have an account?Sign In</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -2,64 +2,40 @@
 @{
     ViewData["Title"] = "MWatchScreen";
 }
-<link rel="stylesheet" href="~/css/MWatchScreen.css" asp-append-version="true" />
-<span class="top-span">Watching @Model.Name </span>
-<br>
-<video class="Responsive_video" src="@Model.VideoLink" controls></video>
-<br><br>
-<div class="vm-container">
-    <div class="row1">
-        <img class="imgsrc" src="@Model.ImgSrc">
-    </div>
-    <div class="row2">
-        <div class="Info">
-            <h3>@Model.Name</h3>
-            <br>
-            <div class="m-info">
-                <p><b>Genre : </b><a href="#">Action</a>, <a href="#">Drama</a></p>
-                <p><b>Director : </b>@Model.Director</p>
-                <p><b>Cast : </b>@Model.Cast</p>
-                <p><b>Release-Date : </b>@Model.DateOfRelease</p>
-            </div>
-            <br>
-        </div>
-    </div>
-</div>
-<div class="context">
-    <p><b>Context : </b> @Model.Desc</p>
-</div>
-<br>
-<hr>
-<br>
-<h2>More Like This : </h2>
-<div class="cards" id="cards">
-
-
-</div>
-
-
-
-
-
-
-
-
-@* @if (Model != null)
+@try
 {
-    @foreach (var i in Model)
-    {
-        <a href="https://www.amazon.in/">
-            <div class="card" id="card">
-                <img src="@i.ImgSrc" />
-                <div class="content">
-                    <h2>@i.Name</h2>
-                    <p>@i.DateOfRelease</p>
+    <link rel="stylesheet" href="~/css/MWatchScreen.css" asp-append-version="true" />
+   <div class="f-cards">
+        <span class="top-span">Watching @Model.Name </span>
+        <br>
+        <video class="Responsive_video" src="@Model.VideoLink" controls></video>
+        <br>
+        <br>
+        <div class="vm-container">
+            <div class="row1">
+                <img class="imgsrc" src="@Model.ImgSrc">
+            </div>
+            <div class="row2">
+                <div class="Info">
+                    <h3>@Model.Name</h3>
+                    <br>
+                    <div class="m-info">
+                        <p><b>Genre : </b>@Model.Genre</p>
+                        <p><b>Director : </b>@Model.Director</p>
+                        <p><b>Cast : </b>@Model.Cast</p>
+                        <p><b>Release-Date : </b>@Model.DateOfRelease</p>
+                    </div>
+                    <br>
                 </div>
             </div>
-        </a>
-    }
+        </div>
+        <div class="context">
+            <p><b>Context : </b> @Model.Desc</p>
+        </div>
+        <br>
+   </div>
 }
-else
+catch (System.NullReferenceException e)
 {
-    Console.WriteLine("!! Model == Null !!");
-} *@
+    Console.WriteLine(e);
+}

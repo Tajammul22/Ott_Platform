@@ -1,50 +1,94 @@
 ﻿@model MCardModel
 @{
     ViewData["Title"] = "AdminAddMovie";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+.Form{
+        margin-top: 8%;
+        padding-right: 10%;
+        padding-left: 10%;
 }
 
-<h1>AdminAddMovie</h1>
+ .btn {
+        text-decoration: none;
+        padding: 10px 25px 10px 25px;
+        background: red;
+        width: 180px;
+        text-align: center;
+        margin-left: 15px;
+        border: 1px solid black;
+        transition: 0.2s;
+        color: white;
+ }
+
+        .btn:hover {
+            transition: 0.2s;
+            color: white;
+            background: transparent;
+            border: 1px solid red;
+        }
+</style>
+<h1 style="margin-left:10px">Add Movie</h1>
 
 <div class="container">
     <div class="Form">
-        <form asp-controller="Home" asp-action="Create" method="post">
+        <form asp-controller="Home" asp-action="Create" method="post" enctype="multipart/form-data">
             <div class="form-group">
-                <label asp-for="Name">Enter Movie Name :  </label>
-                <input asp-for="Name" class="form-control" />
+                <label asp-for="Id">Enter Id :  </label>
+                <input asp-for="Id" type="number"  class="form-control" required/>
             </div>
             <div class="form-group">
-                <label asp-for="ImgSrc">Enter Image Url : </label>
-                <input asp-for="ImgSrc" class="form-control"/>
+                <label asp-for="Name">Enter Movie Name :  </label>
+                <input asp-for="Name" class="form-control" required/>
+            </div>
+            <div class="form-group">
+                <label>Enter Image Url : </label>
+                <input type="file" class="form-control" name="myImg" required />
             </div>
             <div class="form-group">
                 <label asp-for="DateOfRelease">Enter Release Date : </label>
-                <input asp-for="DateOfRelease" class="form-control" />
+                <input asp-for="DateOfRelease" type="date" class="form-control" required />
             </div>            
             <div class="form-group">
                 <label asp-for="Rating">Enter Rating : </label>
-                <input asp-for="Rating" class="form-control" />
+                <input asp-for="Rating" type="number" onkeyup="if(this.value > 5) this.value = 5;" class="form-control" required />
             </div>           
             <div class="form-group">
-                <label asp-for="VideoLink">Enter Video Url : </label>
-                <input asp-for="VideoLink" class="form-control" />
+                <label>Enter Video Url : </label>
+                <input type="file" name="myVideo" class="form-control" required />
             </div>            
             <div class="form-group">
-                <label asp-for="Desc">Enter Image Url : </label>
-                <input asp-for="Desc" class="form-control" />
+                <label asp-for="Desc">Enter Description : </label>
+                <input asp-for="Desc" class="form-control" required />
             </div>
             <div class="form-group">
                 <label asp-for="Cast">Enter Cast Names : </label>
-                <input asp-for="Cast" class="form-control" />
+                <input asp-for="Cast" class="form-control" required />
             </div>
             <div class="form-group">
                 <label asp-for="Director">Enter Director Name : </label>
-                <input asp-for="Director" class="form-control" />
+                <input asp-for="Director" class="form-control" required />
             </div>
-
+            <div class="form-group">
+                <label asp-for="Genre">Enter Movie Genre : </label>
+                <input asp-for="Genre" class="form-control" required />
+            </div>
             <br>
              <div class="form-group">
-                 <button type="submit" class="btn">Submit</button>
+                 <button type="submit" class="btn" style="color:white">Submit</button>
              </div>
         </form>
     </div>
 </div>
+
+
+@*     <form asp-controller="Home" asp-action="Tryle" method="post" enctype="multipart/form-data">
+            <input name="name"/>
+            <br>
+            <input name="value" />
+            <br>
+            <input type="file" name="uploadimg" />
+            <br>
+            <button>Submit</button>
+        </form> *@

@@ -1,0 +1,63 @@
+﻿@model MyViewModel
+@{
+    ViewData["Title"] = "SWatchScreen";
+}
+@try
+{
+    <link rel="stylesheet" href="~/css/MWatchScreen.css" asp-append-version="true" />
+    <div class="f-cards">
+        <span class="top-span">Watching @Model.Series.Name / @Model.Episode.EpisodeName</span>
+        <br>
+            <video class="Responsive_video" src="@Model.Episode.VideoSource" controls></video>
+        <br>
+        <div class="vm-container">
+            <div class="row1">
+                <img class="imgsrc" src="@Model.Series.ImgSrc">
+            </div>
+            <div class="row2">
+                <div class="Info">
+                    <h3>@Model.Series.Name</h3>
+                    <br>
+                    <div class="m-info">
+                        <p><b>Genre : </b>@Model.Series.Genre</p>
+                        <p><b>Director : </b>@Model.Series.Director</p>
+                        <p><b>Cast : </b>@Model.Series.Cast</p>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="Sesons">
+             <h3>Episodes</h3>
+             <div class="Episodes-box">
+                @foreach (var i in Model.Series.Episodes)
+                {
+                    if(i.Id == Model.Episode.Id)
+                    {
+                        <a class="CurrentEpisode" asp-area="" asp-controller="Home" asp-action="ChangeEpisode" asp-route-seriesId="@Model.Series.Id" asp-route-episodeId="@i.Id">@i.EpisodeName</a>
+                    } else
+                    {
+                        <a class="AnotherEpisode" asp-area="" asp-controller="Home" asp-action="ChangeEpisode" asp-route-seriesId="@Model.Series.Id" asp-route-episodeId="@i.Id">@i.EpisodeName</a>
+                    }
+                    <br>
+                }
+             </div>
+        </div>
+        <br>
+        <div class="context">
+            <p><b>Context : </b> @Model.Series.Desc</p>
+        </div>
+        <br>
+        <hr>
+        <br>
+        <h2>More Like This : </h2>
+        <div class="cards" id="cards">
+        </div>
+    </div>
+}
+catch (System.NullReferenceException e)
+{
+    Console.WriteLine(e);
+}
+

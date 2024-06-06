@@ -1,0 +1,55 @@
+﻿@model SCardModel
+@{
+    ViewData["Title"] = "Tryle";
+}
+<style>
+    .btn {
+        text-decoration: none;
+        padding: 10px 25px 10px 25px;
+        background: red;
+        width: 180px;
+        text-align: center;
+        margin-left: 15px;
+        border: 1px solid black;
+        transition: 0.2s;
+        color: white;
+    }
+
+        .btn:hover {
+            transition: 0.2s;
+            color: white;
+            background: transparent;
+            border: 1px solid red;
+        }
+</style>
+<br>
+<br>
+<h1 style="margin-left: 5%;margin-top: 2%;">
+    Register Series
+</h1>
+<div style="margin:5%">
+    <form asp-controller="Home" asp-action="CreateSeries" method="post" enctype="multipart/form-data">
+        <input asp-for="Id" type="number" class="form-control" placeholder="Enter Series ID" required/>
+        <br>
+        <input asp-for="Name" class="form-control" placeholder="Enter Series Name" required />
+        <br>
+        <input asp-for="Director" class="form-control" placeholder="Enter Series Director" required />
+        <br>
+        <input asp-for="Genre" class="form-control" placeholder="Enter Series Genre" required/>
+        <br>
+        <input asp-for="Cast" class="form-control" placeholder="Enter Series Cast" required />
+        <br>
+        <input asp-for="Desc" class="form-control" placeholder="Enter Series Description" required />
+        <br>
+        <input type="file" name="imgsrc" class="form-control" placeholder="Enter Series Poster" required />
+        <br>
+        <input type="number" name="EpId" class="form-control" placeholder="Enter Episode Id" required />
+        <br>
+        <input name="Epname" class="form-control" placeholder="Enter Episode Name" required />
+        <br>
+        <input type="file" name="vidsrc" class="form-control" placeholder="Upload Video" required />
+        <br>
+        <button type="submit" class="btn" style="color:white">Submit</button>
+    </form>
+</div>
+

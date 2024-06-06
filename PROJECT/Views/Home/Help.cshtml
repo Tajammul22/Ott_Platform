@@ -2,6 +2,75 @@
 @{
     ViewData["Title"] = "Help";
 }
+<style>
+    .Main-container {
+        text-align: center;
+        align-content: center;
+        height: 400px;
+    }
 
-<h1>Help & Support !</h1>
+        .Main-container form input {
+            width: 50%;
+            background: transparent;
+            font-size: medium;
+            border: 1px solid white;
+            border-radius: 3px;
+            padding: 5px 20px;
+            color: white;
+        }
+
+        .Main-container form textarea {
+            width: 50%;
+            background: transparent;
+            font-size: medium;
+            border: 1px solid white;
+            border-radius: 3px;
+            padding: 5px 20px;
+            color: white;
+        }
+
+    .btn {
+        text-decoration: none;
+        padding: 10px 25px 10px 25px;
+        background: red;
+        width: 180px;
+        text-align: center;
+        margin-left: 15px;
+        border: 1px solid black;
+        transition: 0.2s;
+        color: white;
+    }
+
+        .btn:hover {
+            transition: 0.2s;
+            color: white;
+            background: transparent;
+            border: 1px solid red;
+        }
+</style>
+<br>
+<br>
+<br>
+<div class="Main-container">
+    <h2>Help and Support</h2>
+    <br>
+    <div class="HelpContainer">
+        <form asp-controller="Home" asp-action="SendEmail" method="post">
+            <input type="email" placeholder="Enter Your Email" name="mail" required />
+            <br>
+            <br>
+            <textarea placeholder="Enter Your Query" rows="4" required name="message"></textarea>
+            <br>
+            <br>
+            <button class="btn">Submit</button>
+        </form>
+    </div>
+</div>
+
+@if (ViewBag.EmailSent != null && (bool)ViewBag.EmailSent)
+{
+    <script>
+        alert("Email sent successfully 📨");
+    </script>
+}
 

@@ -5,15 +5,14 @@
 
     .c1 img {
         vertical-align: middle;
-        height: 500px;
+        height: 700px;
         width: 100%;
         object-fit: cover;
         filter: brightness(0.8);
     }
 
 .slider-control {
-    border-radius: 15px;
-    margin-top: 15px;
+
 }
 
 .rl-control {
@@ -31,7 +30,9 @@
 }
 
 @media (max-width:720px) {
-
+    .rl-control {
+        padding-top: 111px;
+    }
     p{
         padding:0px;
     }
@@ -41,7 +42,7 @@
     }
 
     .c1 img {
-        height: 170px;
+        height: 200px;
     }
 
     .carousel .carousel-inner .carousel-item .carousel-caption{

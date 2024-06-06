@@ -2,7 +2,56 @@
     ViewData["Title"] = "Home Page";
     ViewBag.Title = "Index";
 }
-@model List<MCardModel>
+@model CombinedViewModel
+
+<style>
+    .Rsticker{
+        position: fixed;
+        z-index: 16;
+        left: 0;
+        top: 35%;
+    }
+    .Rsticker .box{
+        display:grid;
+    }
+    .Rsticker .box a{
+        padding:10px;
+        text-decoration:none;
+        color:white;
+        transition:0.5s;
+        background: black;
+        font-size:25px;
+        width:60px;
+        text-align:center;
+        margin-bottom:5px;
+    }
+    .Rsticker .box a:hover{
+        transition:0.5s;
+        padding:12px;
+        width:65px;
+        background: red;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="Rsticker">
+    <div class="box">
+        <a href="mailto:tajju.mistry@gmail.com"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>
+        <a href="https://www.instagram.com/_imkk45_._/?igsh=MWZmcDQ4NHhld2xmZw%3D%3D"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+        <a href="https://wa.me/7046067472"><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
+    </div>
+</div>
 @Html.Partial("Slider")
 <br>
+<br>
 @Html.Partial("Cards")
+
+@Html.Partial("SeriesCard")
+<br>
+@Html.Partial("Panel1") 
+<br>
+<br>
+@Html.Partial("DemiFooter")
+<br>
+
+

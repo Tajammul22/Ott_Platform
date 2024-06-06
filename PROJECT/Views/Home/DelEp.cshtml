@@ -1,0 +1,62 @@
+﻿@model List<Episode>
+@{
+    ViewData["Title"] = "DelEp";
+}
+<style>
+    .selector {
+        background-color: #0f0f0f;
+        color: white;
+        padding: 8px 10px;
+        border: 1px solid white;
+    }
+
+    .btn {
+        text-decoration: none;
+        padding: 10px 25px 10px 25px;
+        background: red;
+        width: 180px;
+        text-align: center;
+        border: 1px solid black;
+        transition: 0.2s;
+        color: white;
+    }
+
+        .btn:hover {
+            transition: 0.2s;
+            color: white;
+            background: transparent;
+            border: 1px solid red;
+        }
+</style>
+<br>
+<br>
+<div class="DeleteDiv" style="padding:8%;">
+    <div class="container">
+        <form asp-controller="Home" asp-action="DelEpi" method="post">
+            <h4>Select Episode : </h4>
+            <input name="SerId" type="hidden" value="@ViewBag.SeriesId" />
+            <select name="EpId" class="selector">
+                @{
+                    bool Valid = false;
+                    int num = 1;
+                    if (Model.Count > 1)
+                    {
+                        foreach (var i in Model)
+                        {
+                            if (Valid)
+                            {
+                                <option value="@num">@i.EpisodeName</option>
+                                num++;
+                            }
+                            Valid = true;
+                        }
+                    }
+                }
+            </select>
+            <br>
+            <br>
+            <button class="btn">Delete Episode</button>
+        </form>
+    </div>
+</div>
+

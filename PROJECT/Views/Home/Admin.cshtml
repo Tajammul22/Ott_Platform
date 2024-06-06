@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewData["Title"] = "Admin";
+}
+<style>
+    .AdminContainer{
+        text-align:center;
+        padding:8%;
+    }
+    .Controls{
+        padding:3%;
+    }
+    .Controls a{
+        text-decoration:none;
+        color:white;
+    }
+    .btn{
+        text-decoration: none;
+        padding: 10px 25px 10px 25px;
+        background: red;
+        width: 180px;
+        text-align: center;
+        margin-left: 15px;
+        border: 1px solid black;
+        transition: 0.2s;
+        color: white;
+    }
+
+    .btn:hover {
+        transition: 0.2s;
+        color: white;
+        background: transparent;
+        border: 1px solid red;
+    }
+</style>
+<br>
+<br>
+<div class="AdminContainer">
+    <h2>WELCOME ADMIN</h2>
+    <h4 class="aleart-isDesktop">Caution: These controls are critical. Exercise extreme care and consult the developer before making any changes.</h4>
+    <div class="Controls" id="Controls">
+        <a class="btn" asp-controller="Home" asp-action="AdminAddMovie">Add Movie</a>
+        <a class="btn" asp-controller="Home" asp-action="AdminDelete">Delete Movie</a>
+        <a class="btn" asp-controller="Home" asp-action="Add">Add Series</a>    
+        <a class="btn" asp-controller="Home" asp-action="AddEpisodes">Add Episode</a>
+        <a class="btn" asp-controller="Home" asp-action="DeleteEpisodes">Delete Episode</a>
+        <a class="btn" asp-controller="Home" asp-action="AdminDeleteSeries">Delete Series</a>
+        <a class="btn" asp-controller="Home" asp-action="WatchQuery">All Querys</a>
+    </div>
+</div>
+
+<script>
+    function isDesktop() {
+        return window.screen.width >= 960;
+    }
+    if (!isDesktop()) {
+        document.getElementsByClassName('Controls').style.display = "none";
+        document.getElementsByClassName('aleart-isDesktop').style.display = "contents";
+    } else {
+        document.getElementsByClassName('aleart-isDesktop').style.display = "none";
+</script>

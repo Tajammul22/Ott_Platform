@@ -1,0 +1,70 @@
+﻿@model Dictionary<string,SCardModel>
+@{
+    ViewData["Title"] = "DeleteEp";
+}
+
+<style>
+    .selector {
+        background-color: #0f0f0f;
+        color: white;
+        padding: 8px 10px;
+        border: 1px solid white;
+    }
+
+    .btn {
+        text-decoration: none;
+        padding: 10px 25px 10px 25px;
+        background: red;
+        width: 180px;
+        text-align: center;
+        border: 1px solid black;
+        transition: 0.2s;
+        color: white;
+    }
+
+        .btn:hover {
+            transition: 0.2s;
+            color: white;
+            background: transparent;
+            border: 1px solid red;
+        }
+</style>
+<br>
+<br>
+<div class="DeleteDiv" style="padding:8%;">
+    @{
+        int invalid = 0;
+        foreach(var i in Model)
+        {
+            if(i.Value.Episodes.Count > 1)
+            {
+                invalid += 1;
+            }
+        }
+        if(invalid == 0)
+        {
+            <h3>No Series Available to Delete</h3>
+        } else
+        {
+            <h1>Select Series to Delete</h1>
+            <div class="container">
+                <form asp-controller="Home" asp-action="DeleteEpisode" method="post">
+                    <select name="seriesId" class="selector">
+                        @foreach (var i in Model)
+                        {
+                            if (i.Value.Episodes.Count > 1)
+                            {
+                                <option value="@i.Key">@i.Value.Name</option>
+                            }
+                        }
+                    </select>
+                    <br>
+                    <br>
+                    <button class="btn">Next</button>
+                </form>
+            </div>
+        }
+    }
+    
+</div>
+

@@ -1,0 +1,59 @@
+﻿@model Dictionary<string, SCardModel>
+@{
+    ViewData["Title"] = "AddEpisodes";
+}
+<style>
+    .selector{
+        background: black;
+        color: white;
+        border-radius: 3px;
+        padding: 8px 20px;
+        margin-bottom: 15px;
+    }
+
+    .btn {
+        text-decoration: none;
+        padding: 10px 25px 10px 25px;
+        background: red;
+        width: 180px;
+        text-align: center;
+        margin-left: 15px;
+        border: 1px solid black;
+        transition: 0.2s;
+        color: white;
+    }
+
+        .btn:hover {
+            transition: 0.2s;
+            color: white;
+            background: transparent;
+            border: 1px solid red;
+        }
+</style>
+
+<br>
+<br>
+    <br>
+<div id="formclass">
+    <h2 style="margin-left:10px">Register New Episode</h2>
+    <br>
+    <div class="container">
+        <form asp-controller="Home" asp-action="addEp" method="post" enctype="multipart/form-data">
+            <select name="seriesId" class="selector">
+                @foreach (var i in Model)
+                {
+                    <option value="@i.Key">@i.Value.Name</option>
+                }
+            </select>
+            <br>
+            <input type="number" class="form-control" onkeyup="if(this.value == 1) this.value = null;" name="EpId" required />
+            <br>
+            <input type="text" class="form-control" onkeyup="if(this.value == 'Episode 1') this.value = null;" name="EpName" required />
+            <br>
+            <input type="file" class="form-control" name="EpVideo" required/>
+            <br>
+            <br>
+            <button class="btn">Add Episode</button>
+        </form>
+    </div>
+</div>
